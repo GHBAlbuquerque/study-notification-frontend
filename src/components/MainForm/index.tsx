@@ -1,0 +1,37 @@
+import { MessageCirclePlusIcon } from "lucide-react";
+import { DefaultButton } from "../DefaultButton";
+import { DefaultInput } from "../DefaultInput";
+import DefaultTextArea from "../DefaultTextArea";
+
+export default function MainForm() {
+  function handleCreateNotification(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    console.log("Create Notification");
+    console.log(event);
+  }
+
+  return (
+    <form onSubmit={handleCreateNotification} className="form" action="">
+      <div className="formRow">
+        <DefaultInput name= "category" type="text" placeholder="Categoy" />
+      </div>
+
+      <div className="formRow">
+        <DefaultTextArea name= "message" placeholder="Message" maxLength={280}/>
+      </div>
+
+      <div className="formRow">
+        <DefaultButton
+          type="submit"
+          icon={<MessageCirclePlusIcon />}
+          color="orange"
+          aria-label="Initiate task"
+          title="Initiate task"
+        >
+          Create Notification
+        </DefaultButton>
+      </div>
+    </form>
+  );
+}
