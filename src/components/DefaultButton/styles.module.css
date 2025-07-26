@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 24rem;
+  min-width: 18rem;
   padding: 0.8rem;
   border-radius: 0.8rem;
   margin: 2rem 0;
@@ -30,5 +30,5 @@
 
 .orange {
   background: var(--primary);
-  color: var(--text-over-primary);
+  color: whitesmoke;
 }
