@@ -4,6 +4,7 @@
   padding: 0.8rem;
   color: var(--text-primary-default);
   outline: none;
+  min-width: 30rem;
 
   border-radius: 0.8rem;
   border: 0.2rem solid gray;
