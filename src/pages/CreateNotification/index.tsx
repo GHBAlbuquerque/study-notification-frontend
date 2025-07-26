@@ -1,7 +1,12 @@
+import { Container } from "../../components/Container";
+import CreateNotificationForm from "../../components/CreateNotificationForm";
+import { Heading } from "../../components/Heading";
+
 export function CreateNotification() {
-    return (
-        <div>
-            <h1>Create Notification</h1>
-        </div>
-    )
+  return (
+    <Container>
+      <Heading>Create Notification</Heading>
+      <CreateNotificationForm />
+    </Container>
+  );
 }

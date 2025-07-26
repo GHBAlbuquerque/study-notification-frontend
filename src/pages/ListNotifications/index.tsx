@@ -1,7 +1,10 @@
-export function ListNotification() {
-    return (
-        <div>
-            <h1>List Notification</h1>
-        </div>
-    )
+import { Container } from "../../components/Container";
+import { Heading } from "../../components/Heading";
+
+export function ListNotifications() {
+  return (
+    <Container>
+      <Heading>List Notifications</Heading>
+    </Container>
+  );
 }
