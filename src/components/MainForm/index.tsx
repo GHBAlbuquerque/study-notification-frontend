@@ -2,14 +2,25 @@ import { MessageCirclePlusIcon } from "lucide-react";
 import { DefaultButton } from "../DefaultButton";
 import DefaultTextArea from "../DefaultTextArea";
 import { DefaultSelect } from "../DefaultSelect";
+import { createNotification } from "../../api/notificationService";
 
 export default function MainForm() {
-  function handleCreateNotification(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
 
-    console.log("Create Notification");
-    console.log(event);
+    async function handleCreateNotification(event: React.FormEvent<HTMLFormElement>) {
+  event.preventDefault();
+
+  const formData = new FormData(event.currentTarget);
+  const category = formData.get("category") as string;
+  const message = formData.get("message") as string;
+
+  try {
+    await createNotification({ category, message });
+    alert("Notification created!"); //TODO
+  } catch (err) {
+    console.error(err);
+    alert("Failed to create notification"); //TODO
   }
+}
 
   return (
     <form onSubmit={handleCreateNotification} className="form" action="">

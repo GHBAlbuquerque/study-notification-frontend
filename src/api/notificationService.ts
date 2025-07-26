@@ -1,7 +1,9 @@
 import type { CreateNotificationModel } from "../models/CreateNotificationModel";
 
 export async function createNotification(payload: CreateNotificationModel) {
-  const response = await fetch("https://localhost:8080/notifications", {
+  console.log(payload);
+
+  const response = await fetch("http://localhost:8080/notifications", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,7 +15,7 @@ export async function createNotification(payload: CreateNotificationModel) {
     throw new Error(response.statusText);
   }
 
-  return response.json();
+  return response.ok
 }
 
 export async function getNotificationsPaged() {
