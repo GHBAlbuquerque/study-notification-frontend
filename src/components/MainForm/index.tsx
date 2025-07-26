@@ -2,6 +2,7 @@ import { MessageCirclePlusIcon } from "lucide-react";
 import { DefaultButton } from "../DefaultButton";
 import { DefaultInput } from "../DefaultInput";
 import DefaultTextArea from "../DefaultTextArea";
+import { DefaultSelect } from "../DefaultSelect";
 
 export default function MainForm() {
   function handleCreateNotification(event: React.FormEvent<HTMLFormElement>) {
@@ -14,7 +15,12 @@ export default function MainForm() {
   return (
     <form onSubmit={handleCreateNotification} className="form" action="">
       <div className="formRow">
-        <DefaultInput name= "category" type="text" placeholder="Categoy" />
+        <DefaultSelect name= "category" defaultValue="">
+          <option value="" disabled>Select category</option>
+          <option value="MOVIES">Movies</option>
+          <option value="FINANCE">Finance</option>
+          <option value="SPORTS">Sports</option> 
+    </DefaultSelect>
       </div>
 
       <div className="formRow">
