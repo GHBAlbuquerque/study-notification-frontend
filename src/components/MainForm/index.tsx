@@ -1,6 +1,5 @@
 import { MessageCirclePlusIcon } from "lucide-react";
 import { DefaultButton } from "../DefaultButton";
-import { DefaultInput } from "../DefaultInput";
 import DefaultTextArea from "../DefaultTextArea";
 import { DefaultSelect } from "../DefaultSelect";
 
