@@ -22,16 +22,16 @@
 }
 
 .notificationsTable th {
-  background-color: var(--gray-600);
+  background-color: var(--gray-200);
 }
 
 .notificationsTable td {
-  background-color: var(--gray-800);
+  background-color: var(--gray-100);;
 }
 
 .notificationsTable th,
 .notificationsTable td {
-  border-bottom: 0.2rem solid var(--gray-700);
+  border-bottom: 0.2rem solid var(--gray-400);
   text-align: left;
   padding: 1.6rem;
 }

@@ -6,6 +6,11 @@
 
 html {
   font-size: 62.5%;
+    background: linear-gradient(
+    to bottom right,
+    var(--white),
+    var(--gray-100)
+  );
 }
 
 body {
@@ -15,22 +20,6 @@ body {
   color: var(--text-default);
   min-height: 100vh;
   height: 100%;
-}
-
-html[data-theme='dark'] {
-  background: linear-gradient(
-    to bottom right,
-    var(--gray-900),
-    var(--gray-500)
-  );
-}
-
-html[data-theme='light'] {
-  background: linear-gradient(
-    to bottom right,
-    var(--gray-900),
-    var(--gray-800)
-  );
 }
 
 .form {
@@ -53,7 +42,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 0 transparent; /* your background color */
+  -webkit-box-shadow: 0 0 0 0 transparent;
   box-shadow: 0 0 0 0 transparent;
   -webkit-text-fill-color: var(--text-default);
   transition: background-color 5000s ease-in-out 0s;
