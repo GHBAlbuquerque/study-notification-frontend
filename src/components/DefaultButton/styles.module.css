@@ -28,7 +28,7 @@
   color: var(--text-over-error);
 }
 
-.green {
+.orange {
   background: var(--primary);
   color: var(--text-over-primary);
 }

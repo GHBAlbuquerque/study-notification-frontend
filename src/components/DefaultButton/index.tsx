@@ -2,12 +2,12 @@ import styles from './styles.module.css';
 
 type DefaultButtonProps = {
   icon: React.ReactNode;
-  color?: 'red' | 'green';
+  color?: 'red' | 'orange';
 } & React.ComponentProps<'button'>;
 
 export function DefaultButton({
   icon,
-  color = 'green',
+  color = 'orange',
   ...props
 }: DefaultButtonProps) {
   return (
