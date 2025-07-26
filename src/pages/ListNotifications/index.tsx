@@ -3,6 +3,8 @@ import { Container } from "../../components/Container";
 import { Heading } from "../../components/Heading";
 import styles from "./styles.module.css";
 import type { GetNotificationModel } from "../../models/GetNotificationModel";
+import { DefaultButton } from "../../components/DefaultButton";
+import { LucideArrowLeft, LucideArrowRight } from "lucide-react";
 
 export function ListNotifications() {
   useEffect(() => {
@@ -12,14 +14,14 @@ export function ListNotifications() {
   const notifications = new Array<GetNotificationModel>();
 
   notifications.push({
-  id: 1,
-  userId: 42,
-  category: "MOVIES",
-  channel: "EMAIL",
-  message: "Test notification",
-  timestamp: "2025-07-26T15:30:00Z",
-  status: "SENT",
-});
+    id: 1,
+    userId: 42,
+    category: "MOVIES",
+    channel: "EMAIL",
+    message: "Test notification",
+    timestamp: "2025-07-26T15:30:00Z",
+    status: "SENT",
+  });
 
   return (
     <>
@@ -57,6 +59,23 @@ export function ListNotifications() {
               })}
             </tbody>
           </table>
+        </div>
+      </Container>
+
+      <Container>
+        <div className={styles.buttonContainer}>
+          <DefaultButton
+            icon={<LucideArrowLeft />}
+            color="orange"
+            title="Previous"
+            aria-label="Previous"
+          />
+          <DefaultButton
+            icon={<LucideArrowRight />}
+            color="orange"
+            title="Next"
+            aria-label="Next"
+          />
         </div>
       </Container>
     </>

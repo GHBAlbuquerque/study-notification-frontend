@@ -1,6 +1,14 @@
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
 .buttonContainer button {
   min-width: auto;
-  margin: 0;
+  margin-right: 0;
   padding: 1rem;
 }
 
