@@ -3,6 +3,7 @@ import { DefaultButton } from "../DefaultButton";
 import DefaultTextArea from "../DefaultTextArea";
 import { DefaultSelect } from "../DefaultSelect";
 import { createNotification } from "../../api/notificationService";
+import { toast } from "react-toastify";
 
 export default function MainForm() {
 
@@ -15,17 +16,17 @@ export default function MainForm() {
 
   try {
     await createNotification({ category, message });
-    alert("Notification created!"); //TODO
+    toast.success("Notification created!"); //TODO
   } catch (err) {
     console.error(err);
-    alert("Failed to create notification"); //TODO
+    toast.error("Failed to create notification"); //TODO
   }
 }
 
   return (
     <form onSubmit={handleCreateNotification} className="form" action="">
       <div className="formRow">
-        <DefaultSelect name= "category" defaultValue="">
+        <DefaultSelect name= "category" defaultValue="" required>
           <option value="" disabled>Select category</option>
           <option value="MOVIES">Movies</option>
           <option value="FINANCE">Finance</option>
@@ -34,7 +35,7 @@ export default function MainForm() {
       </div>
 
       <div className="formRow">
-        <DefaultTextArea name= "message" placeholder="Message" maxLength={280}/>
+        <DefaultTextArea name= "message" placeholder="Message" maxLength={280} required/>
       </div>
 
       <div className="formRow">
