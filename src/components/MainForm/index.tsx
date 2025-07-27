@@ -1,24 +1,49 @@
 import { MessageCirclePlusIcon } from "lucide-react";
 import { DefaultButton } from "../DefaultButton";
-import { DefaultInput } from "../DefaultInput";
 import DefaultTextArea from "../DefaultTextArea";
+import { DefaultSelect } from "../DefaultSelect";
+import { createNotification } from "../../api/notificationService";
+import { toast } from "react-toastify";
 
 export default function MainForm() {
-  function handleCreateNotification(event: React.FormEvent<HTMLFormElement>) {
+  async function handleCreateNotification(
+    event: React.FormEvent<HTMLFormElement>
+  ) {
     event.preventDefault();
 
-    console.log("Create Notification");
-    console.log(event);
+    const formData = new FormData(event.currentTarget);
+    const category = formData.get("category") as string;
+    const message = formData.get("message") as string;
+
+    try {
+      await createNotification({ category, message });
+      toast.success("Notification created!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to create notification");
+    }
   }
 
   return (
     <form onSubmit={handleCreateNotification} className="form" action="">
       <div className="formRow">
-        <DefaultInput name= "category" type="text" placeholder="Categoy" />
+        <DefaultSelect name="category" defaultValue="" required>
+          <option value="" disabled>
+            Select category
+          </option>
+          <option value="MOVIES">Movies</option>
+          <option value="FINANCE">Finance</option>
+          <option value="SPORTS">Sports</option>
+        </DefaultSelect>
       </div>
 
       <div className="formRow">
-        <DefaultTextArea name= "message" placeholder="Message" maxLength={280}/>
+        <DefaultTextArea
+          name="message"
+          placeholder="Message"
+          maxLength={280}
+          required
+        />
       </div>
 
       <div className="formRow">
