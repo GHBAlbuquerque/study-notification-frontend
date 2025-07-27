@@ -11,8 +11,9 @@ It is composed of a frontend application (this repo) and a backend interface ([l
 This is the **frontend** for the Gila Notification system, built with **React**.  
 It provides a simple UI to list and manage notifications.
 
-'/' - Create Notification
-'/notifications' - List Notifications
+Routes:
+- '/' - Create Notification
+- '/notifications' - List Notifications
 
 Available Categories:
 - Movies
@@ -72,12 +73,6 @@ Make sure you have the following installed:
 - [Node.js](https://nodejs.org/en/download/) (v16+ recommended)
 - npm (comes with Node)
 
-
-Make sure you have the following installed:
-
-- [Node.js](https://nodejs.org/en/download/) (v16+ recommended)
-- npm (comes with Node)
-
 ---
 
 ### 🛠️ Installation
@@ -94,8 +89,6 @@ Install dependencies:
 ```bash
 npm install
 ```
-
----
 
 ### ▶️ Running the App
 
