@@ -1,27 +1,47 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "../../components/Container";
 import { Heading } from "../../components/Heading";
 import styles from "./styles.module.css";
-import type { GetNotificationModel } from "../../models/GetNotificationModel";
 import { DefaultButton } from "../../components/DefaultButton";
-import { LucideArrowLeft, LucideArrowRight } from "lucide-react";
+import { LucideArrowLeft, LucideArrowRight, RefreshCcw } from "lucide-react";
+import { toast } from "react-toastify";
+import {
+  emptyPagedResponse,
+  type GetNotificationsPagedResponse,
+} from "../../models/GetNotificationsPagedResponse";
+import { getNotificationsPaged } from "../../api/notificationService";
 
 export function ListNotifications() {
   useEffect(() => {
     document.title = "Gila - List Notifications";
   }, []);
 
-  const notifications = new Array<GetNotificationModel>();
+  const [notifications, setNotifications] =
+    useState<GetNotificationsPagedResponse>(emptyPagedResponse);
 
-  notifications.push({
-    id: 1,
-    userId: 42,
-    category: "MOVIES",
-    channel: "EMAIL",
-    message: "Test notification",
-    timestamp: "2025-07-26T15:30:00Z",
-    status: "SENT",
-  });
+  useEffect(() => {
+    async function loadNotifications() {
+      const result = await fetchNotificationsPaged(0, 10);
+      setNotifications(result);
+    }
+
+    loadNotifications();
+  }, []);
+
+  async function fetchNotificationsPaged(
+    page: number,
+    size: number
+  ): Promise<GetNotificationsPagedResponse> {
+    try {
+      const result = await getNotificationsPaged(page, size);
+      console.log("Data:", result.data);
+      return result;
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to get notifications");
+      return emptyPagedResponse;
+    }
+  }
 
   return (
     <>
@@ -44,7 +64,7 @@ export function ListNotifications() {
               </tr>
             </thead>
             <tbody>
-              {notifications.map((notification) => {
+              {notifications.data.map((notification) => {
                 return (
                   <tr key={notification.id}>
                     <td>{notification.id}</td>
@@ -73,6 +93,12 @@ export function ListNotifications() {
           <DefaultButton
             icon={<LucideArrowRight />}
             color="orange"
+            title="Next"
+            aria-label="Next"
+          />
+          <DefaultButton
+            icon={<RefreshCcw />}
+            color="gray"
             title="Next"
             aria-label="Next"
           />

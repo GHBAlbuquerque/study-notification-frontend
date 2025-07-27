@@ -18,9 +18,10 @@ export async function createNotification(payload: CreateNotificationModel) {
   return response.ok
 }
 
-export async function getNotificationsPaged() {
-  const response = await fetch("http://localhost:8080/notifications", {
+export async function getNotificationsPaged(page: number = 0, size: number = 10) {
+  const response = await fetch(`http://localhost:8080/notifications?page=${page}&size=${size}`, {
     method: "GET",
+    
   });
 
   if (!response.ok) {

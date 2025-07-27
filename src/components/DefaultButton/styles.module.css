@@ -32,3 +32,8 @@
   background: var(--primary);
   color: whitesmoke;
 }
+
+.gray {
+  background: var(--gray-300);
+  color: whitesmoke;
+}
