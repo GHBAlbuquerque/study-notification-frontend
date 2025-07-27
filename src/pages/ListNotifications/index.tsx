@@ -19,6 +19,7 @@ export function ListNotifications() {
 
   const [notifications, setNotifications] =
     useState<GetNotificationsPagedResponse>(emptyPagedResponse);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [page, setPage] = useState<number>(0);
   const size = 10;
 
@@ -29,7 +30,7 @@ export function ListNotifications() {
     }
 
     loadNotifications();
-  }, [page]);
+  }, [page, refreshTrigger]);
 
   async function fetchNotificationsPaged(
     page: number,
@@ -47,8 +48,11 @@ export function ListNotifications() {
   }
 
   function refresh() {
-    console.log("refresh!");
-    setPage(0);
+    if(page === 0) {
+      setRefreshTrigger((previous) => previous + 1);
+    } else {
+      setPage(0);
+    }
   }
 
   function handleNext() {
@@ -77,7 +81,7 @@ export function ListNotifications() {
       <Container>
         <Header />
       </Container>
-      
+
       <Container>
         <Heading>List Notifications</Heading>
       </Container>
