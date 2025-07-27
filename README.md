@@ -1,5 +1,5 @@
 # 📬 Notification System
-### gila-notification-backend
+### gila-notification-frontend
 
 Hello!
 This is my challenge for [Gila Software](https://www.gilasoftware.com/).
