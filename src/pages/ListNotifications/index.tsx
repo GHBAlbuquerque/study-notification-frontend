@@ -16,17 +16,18 @@ export function ListNotifications() {
     document.title = "Gila - List Notifications";
   }, []);
 
-  const [notifications, setNotifications] =
-    useState<GetNotificationsPagedResponse>(emptyPagedResponse);
+  const [notifications, setNotifications] = useState<GetNotificationsPagedResponse>(emptyPagedResponse);
+  const [page, setPage] = useState<number>(0);
+  const size = 10;
 
   useEffect(() => {
     async function loadNotifications() {
-      const result = await fetchNotificationsPaged(0, 10);
+      const result = await fetchNotificationsPaged(page, size);
       setNotifications(result);
     }
 
     loadNotifications();
-  }, []);
+  }, [page]);
 
   async function fetchNotificationsPaged(
     page: number,
@@ -41,6 +42,32 @@ export function ListNotifications() {
       toast.error("Failed to get notifications");
       return emptyPagedResponse;
     }
+  }
+
+  function refresh(){
+    console.log("refresh!");
+    setPage(0);
+  }
+
+  function handleNext(){
+    if(page + 1 < notifications.totalPages) {
+      setPage(previous => previous + 1)
+    }
+  }
+
+  function handlePrevious(){
+    if(page - 1 >= 0) {
+      console.log(page-1)
+      setPage(previous => previous - 1)
+    }
+  }
+
+  function hasNext(){
+     return (page + 1 < notifications.totalPages); 
+  }
+
+ function hasPrevious(){
+     return page > 0; 
   }
 
   return (
@@ -89,18 +116,23 @@ export function ListNotifications() {
             color="orange"
             title="Previous"
             aria-label="Previous"
+            onClick={handlePrevious}
+            disabled={!hasPrevious()}
           />
           <DefaultButton
             icon={<LucideArrowRight />}
             color="orange"
             title="Next"
             aria-label="Next"
+            onClick={handleNext}
+            disabled={!hasNext()}
           />
           <DefaultButton
             icon={<RefreshCcw />}
             color="gray"
             title="Next"
             aria-label="Next"
+            onClick={refresh}
           />
         </div>
       </Container>
