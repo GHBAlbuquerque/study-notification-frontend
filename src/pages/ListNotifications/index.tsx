@@ -10,13 +10,15 @@ import {
   type GetNotificationsPagedResponse,
 } from "../../models/GetNotificationsPagedResponse";
 import { getNotificationsPaged } from "../../api/notificationService";
+import Header from "../../components/Header";
 
 export function ListNotifications() {
   useEffect(() => {
     document.title = "Gila - List Notifications";
   }, []);
 
-  const [notifications, setNotifications] = useState<GetNotificationsPagedResponse>(emptyPagedResponse);
+  const [notifications, setNotifications] =
+    useState<GetNotificationsPagedResponse>(emptyPagedResponse);
   const [page, setPage] = useState<number>(0);
   const size = 10;
 
@@ -44,34 +46,38 @@ export function ListNotifications() {
     }
   }
 
-  function refresh(){
+  function refresh() {
     console.log("refresh!");
     setPage(0);
   }
 
-  function handleNext(){
-    if(page + 1 < notifications.totalPages) {
-      setPage(previous => previous + 1)
+  function handleNext() {
+    if (page + 1 < notifications.totalPages) {
+      setPage((previous) => previous + 1);
     }
   }
 
-  function handlePrevious(){
-    if(page - 1 >= 0) {
-      console.log(page-1)
-      setPage(previous => previous - 1)
+  function handlePrevious() {
+    if (page - 1 >= 0) {
+      console.log(page - 1);
+      setPage((previous) => previous - 1);
     }
   }
 
-  function hasNext(){
-     return (page + 1 < notifications.totalPages); 
+  function hasNext() {
+    return page + 1 < notifications.totalPages;
   }
 
- function hasPrevious(){
-     return page > 0; 
+  function hasPrevious() {
+    return page > 0;
   }
 
   return (
     <>
+      <Container>
+        <Header />
+      </Container>
+      
       <Container>
         <Heading>List Notifications</Heading>
       </Container>

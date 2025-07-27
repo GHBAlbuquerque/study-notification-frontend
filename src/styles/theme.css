@@ -22,8 +22,8 @@
   --info: #0ea5e9;
 
   --text-over-primary: #0a0f1a;
-  --text-over-primary-dark: #e6e9f0;
-  --text-over-primary-light: #0a0f1a;
+  --text-over-primary-white: #e6e9f0;
+  --text-over-primary-black: #0a0f1a;
   --text-over-success: #0a0f1a;
   --text-over-warning: #0a0f1a;
   --text-over-error: #e6e9f0;
@@ -35,25 +35,4 @@
   --disabled: #555f7d;
   --text-disabled: #aab3cc;
 
-}
-
-:root[data-theme="light"] {
-  --gray-100: #0a0f1a;
-  --gray-200: #181f2e;
-  --gray-300: #272f43;
-  --gray-400: #363d56;
-  --gray-500: #454f6a;
-  --gray-600: #555f7d;
-  --gray-700: #aab3cc;
-  --gray-800: #cdd3e1;
-  --gray-900: #e6e9f0;
-
-  --text-default: #0a0f1a;
-  --text-muted: #272f43;
-
-  --link-color: #0b8a60;
-  --link-hover: #065f46;
-
-  --toastify-text-color-light: #e6e9f0;
-  --toastify-text-color-dark: #e6e9f0;
 }
