@@ -1,69 +1,112 @@
-# React + TypeScript + Vite
+# 📬 Notification System
+### gila-notification-backend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hello!
+This is my challenge for [Gila Software](https://www.gilasoftware.com/).
 
-Currently, two official plugins are available:
+It is composed of a frontend application (this repo) and a backend interface ([link](https://github.com/GHBAlbuquerque/gila-notification-backend)).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Description
 
-## Expanding the ESLint configuration
+This is the **frontend** for the Gila Notification system, built with **React**.  
+It provides a simple UI to list and manage notifications.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+'/' - Create Notification
+'/notifications' - List Notifications
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Available Categories:
+- Movies
+- Finance
+- Sports
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Available Channels:
+- SMS
+- Push
+- Email
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🏛️ Architecture
+
+```bash
+📁 src
+├── 📁 api         # Service class for API use
+├── 📁 components  # Interface components
+├── 📁 models      # Data representation
+├── 📁 pages       # Main pages
+├── 📁 routers     # Navigation logic
+└── 📁 styles      # CSS and styling
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠 Technology
+
+- ⚛️ **React** (with TypeScript)
+- 📦 **npm** for package management
+- 💅 **CSS Modules** or global styles (under `/styles`)
+- 🔁 **React Router** for navigation
+- 🌱 **Vite**
+- 🎲 **Lucide Icons**
+- 🧰 **ESLint + Prettier** for code formatting and linting
+
+---
+
+## 🛠 UI
+
+'/' - Create Notification
+![Create Notification](misc/Create_Notification.png)
+
+'/notifications' - List Notifications
+![List Notifications](misc/List_Notifications.png)
+---
+
+
+## ▶️ How to Run
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/en/download/) (v16+ recommended)
+- npm (comes with Node)
+
+
+Make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/en/download/) (v16+ recommended)
+- npm (comes with Node)
+
+---
+
+### 🛠️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/your-username/gila-notification-frontend.git
+cd gila-notification-frontend
 ```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+---
+
+### ▶️ Running the App
+
+To start the development server:
+
+```bash
+npm run dev
+```
+
+---
+
+Made with ☕  by @GHBAlbuquerque
+
+
