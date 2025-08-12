@@ -14,7 +14,7 @@ import Header from "../../components/Header";
 
 export function ListNotifications() {
   useEffect(() => {
-    document.title = "Gila - List Notifications";
+    document.title = "Study - List Notifications";
   }, []);
 
   const [notifications, setNotifications] =

@@ -1,14 +1,15 @@
 # 📬 Notification System
-### gila-notification-frontend
+### study-notification-frontend
 
 Hello!
-This is my challenge for [Gila Software](https://www.gilasoftware.com/).
+This is a study repo for a simple front-end using React with 2 screens.
 
-It is composed of a frontend interface (this repo) and a backend application ([link](https://github.com/GHBAlbuquerque/gila-notification-backend)).
+
+It is composed of a frontend interface (this repo) and a backend application ([link](https://github.com/GHBAlbuquerque/study-notification-backend)).
 
 ## Description
 
-This is the **frontend** for the Gila Notification system, built with **React**.  
+This is the **frontend** for the Backend Notification system, built with **React**.  
 It provides a simple UI to list and manage notifications.
 
 Routes:
@@ -80,8 +81,8 @@ Make sure you have the following installed:
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/gila-notification-frontend.git
-cd gila-notification-frontend
+git clone https://github.com/your-username/study-notification-frontend.git
+cd study-notification-frontend
 ```
 
 Install dependencies:

@@ -9,12 +9,12 @@
   --gray-800: #181f2e;
   --gray-900: #0a0f1a;
 
-  --primary-light: #ffc19e;
-  --primary: #f87e2d;
-  --primary-dark: #b34f00;
+--primary-light: #e6ccff; /* light lilac */
+  --primary: #b380ff;       /* mid lilac */
+  --primary-dark: #7a33cc;  /* deep lilac */
 
-  --link-color: #f87e2d;
-  --link-hover: #d4661f;
+  --link-color: #b380ff;    /* mid lilac */
+  --link-hover: #9a66e6;    /* darker hover lilac */
 
   --success: #22c55e;
   --warning: #eab308;

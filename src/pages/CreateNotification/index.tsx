@@ -6,7 +6,7 @@ import Header from "../../components/Header";
 
 export function CreateNotification() {
   useEffect(() => {
-    document.title = "Gila - Create Notification";
+    document.title = "Study - Create Notification";
   }, []);
 
   return (
