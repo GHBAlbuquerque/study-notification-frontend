@@ -11,26 +11,22 @@ import {
 } from "../../models/GetNotificationsPagedResponse";
 import { getNotificationsPaged } from "../../api/notificationService";
 import Header from "../../components/Header";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export function ListNotifications() {
   useEffect(() => {
     document.title = "Study - List Notifications";
   }, []);
 
-  const [notifications, setNotifications] =
-    useState<GetNotificationsPagedResponse>(emptyPagedResponse);
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [page, setPage] = useState<number>(0);
   const size = 10;
 
-  useEffect(() => {
-    async function loadNotifications() {
-      const result = await fetchNotificationsPaged(page, size);
-      setNotifications(result);
-    }
-
-    loadNotifications();
-  }, [page, refreshTrigger]);
+  const { data: notifications = emptyPagedResponse, isLoading, error, refetch} = useQuery<GetNotificationsPagedResponse>({
+    queryKey: [ "notifications", page],
+    queryFn: () => fetchNotificationsPaged(page, size),
+    placeholderData: keepPreviousData,
+    staleTime: 1000
+});
 
   async function fetchNotificationsPaged(
     page: number,
@@ -44,14 +40,6 @@ export function ListNotifications() {
       console.error(err);
       toast.error("Failed to get notifications");
       return emptyPagedResponse;
-    }
-  }
-
-  function refresh() {
-    if(page === 0) {
-      setRefreshTrigger((previous) => previous + 1);
-    } else {
-      setPage(0);
     }
   }
 
@@ -142,7 +130,8 @@ export function ListNotifications() {
             color="gray"
             title="Next"
             aria-label="Next"
-            onClick={refresh}
+            onClick={() => refetch()}
+            disabled={isLoading}
           />
         </div>
       </Container>
