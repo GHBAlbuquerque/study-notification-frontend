@@ -28,6 +28,13 @@ export function ListNotifications() {
     staleTime: 1000
 });
 
+useEffect(() => {
+  if (error) {
+    toast.error("Failed to fetch notifications - query error");
+    console.error(error);
+  }
+}, [error]);
+
   async function fetchNotificationsPaged(
     page: number,
     size: number
@@ -38,7 +45,7 @@ export function ListNotifications() {
       return result;
     } catch (err) {
       console.error(err);
-      toast.error("Failed to get notifications");
+      toast.error("Failed to fetch notifications");
       return emptyPagedResponse;
     }
   }
