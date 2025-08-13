@@ -1,7 +1,7 @@
 import type { CreateNotificationModel } from "../models/CreateNotificationModel";
 
-const backendUrl = process.env.REACT_APP_BACKEND_NOTIFICATION_URL;
-const backendEndpoint = process.env.REACT_APP_BACKEND_NOTIFICATION_ENDPOINT;
+const backendUrl = import.meta.env.VITE_BACKEND_NOTIFICATION_URL;
+const backendEndpoint = import.meta.env.VITE_BACKEND_NOTIFICATION_ENDPOINT;
 
 export async function createNotification(payload: CreateNotificationModel) {
   console.log(payload);
@@ -23,7 +23,6 @@ export async function createNotification(payload: CreateNotificationModel) {
 
 export async function getNotificationsPaged(page: number = 0, size: number = 10) {
   console.log(`${backendUrl}${backendEndpoint}`);
-  console.log(process.env.REACT_APP_BACKEND_NOTIFICATION_URL);
   const response = await fetch(`${backendUrl}${backendEndpoint}?page=${page}&size=${size}`, {
     method: "GET",
     
