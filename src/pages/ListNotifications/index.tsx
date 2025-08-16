@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Container } from "../../components/Container";
 import { Heading } from "../../components/Heading";
 import styles from "./styles.module.css";
@@ -12,6 +12,7 @@ import {
 import { getNotificationsPaged } from "../../api/notificationService";
 import Header from "../../components/Header";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { DefaultSelect } from "../../components/DefaultSelect";
 
 export function ListNotifications() {
   useEffect(() => {
@@ -50,6 +51,23 @@ useEffect(() => {
     }
   }
 
+  const [selected, setSelected] = useState("");
+
+  const filteredList =  useMemo(() => {
+      if(!selected) {
+        return notifications.data
+      }
+
+      return notifications.data.filter(
+        (notification) => notification.category === selected
+      );
+    }, [notifications.data, selected]);
+
+  function handleFiltering(e: React.ChangeEvent<HTMLSelectElement>){
+      const selected = e.target.value;
+      setSelected(selected)
+  }
+
   function handleNext() {
     if (page + 1 < notifications.totalPages) {
       setPage((previous) => previous + 1);
@@ -81,6 +99,18 @@ useEffect(() => {
         <Heading>List Notifications</Heading>
       </Container>
 
+      <div className="formRow">
+        <DefaultSelect name="category" defaultValue="" required onChange={e => handleFiltering(e)}>
+          <option value="" disabled>
+            Select category
+          </option>
+          <option value="">All</option>
+          <option value="MOVIES">Movies</option>
+          <option value="FINANCE">Finance</option>
+          <option value="SPORTS">Sports</option>
+        </DefaultSelect>
+      </div>
+
       <Container>
         <div className={styles.notificationsTable}>
           <table>
@@ -96,7 +126,7 @@ useEffect(() => {
               </tr>
             </thead>
             <tbody>
-              {notifications.data.map((notification) => {
+              {filteredList.map((notification) => {
                 return (
                   <tr key={notification.id}>
                     <td>{notification.id}</td>
