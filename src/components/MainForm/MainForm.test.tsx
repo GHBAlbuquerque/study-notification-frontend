@@ -19,7 +19,7 @@ describe("MainForm", () => {
 
   test("calls CreateNotification and shows sucess toast", async () => {
     // create mocks
-    const mockCreate = vi.spyOn(notificationService, 'createNotification').mockResolvedValue(undefined);
+    const mockCreate = vi.spyOn(notificationService, 'createNotification').mockResolvedValue(true);
     const mockToast = vi.spyOn(toast, 'success');
 
     // render component

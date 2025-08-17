@@ -85,7 +85,7 @@ export function ListNotifications() {
       <Container>
         <Heading>List Notifications</Heading>
       </Container>
-      {notifications.size > 0 ? (
+      {notifications.data.length > 0 ? (
         <>
           <Container>
             <div className={styles.notificationsTable}>
@@ -140,8 +140,8 @@ export function ListNotifications() {
               <DefaultButton
                 icon={<RefreshCcw />}
                 color="ghost"
-                title="Next"
-                aria-label="Next"
+                title="Refresh"
+                aria-label="Refresh"
                 onClick={() => refetch()}
                 disabled={isLoading}
               />

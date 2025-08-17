@@ -4,7 +4,7 @@ import { DefaultSelect } from ".";
 
 const testId = "test-id";
 
-describe("DefaultInput", () => {
+describe("DefaultSelect", () => {
   test("renders select with no label", () => {
     render(<DefaultSelect data-testid={testId} />);
     const defaultSelect = screen.getByTestId(testId);
