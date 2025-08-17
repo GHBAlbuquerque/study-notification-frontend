@@ -103,7 +103,7 @@ npm run dev
 
 ### ▶️ Running tests
 
-To start the development server:
+To run all tests:
 
 ```bash
 npm run test
