@@ -51,8 +51,8 @@ export default function MainForm() {
           type="submit"
           icon={<MessageCirclePlusIcon />}
           color="primary"
-          aria-label="Initiate task"
-          title="Initiate task"
+          aria-label="Create notification"
+          title="Create notification"
         >
           Create Notification
         </DefaultButton>
