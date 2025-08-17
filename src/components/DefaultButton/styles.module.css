@@ -23,17 +23,17 @@
   transition: all 0.1s ease-in-out;
 }
 
-.red {
-  background: var(--error);
-  color: var(--text-over-error);
-}
-
-.orange {
+.primary {
   background: var(--primary);
   color: whitesmoke;
 }
 
-.gray {
+.danger {
+  background: var(--error);
+  color: var(--text-over-error);
+}
+
+.ghost {
   background: var(--gray-300);
   color: whitesmoke;
 }

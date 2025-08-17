@@ -15,3 +15,25 @@ describe('DefaultButton', () => {
     expect(icon).toBeInTheDocument();
     })
 })
+
+describe('DefaultButton', () => {
+    test('applies the correct class when color is danger', () => {
+        render (<DefaultButton icon={<BoxIcon/>} data-testid={testId} color="danger"/>)
+        const defaultButton = screen.getByTestId(testId)
+
+
+    expect(defaultButton).toBeInTheDocument();
+    expect(defaultButton.className).toMatch(/danger/)
+    })
+})
+
+describe('DefaultButton', () => {
+    test('applies the correct class when color is ghost', () => {
+        render (<DefaultButton icon={<BoxIcon/>} data-testid={testId} color="ghost"/>)
+        const defaultButton = screen.getByTestId(testId)
+
+
+    expect(defaultButton).toBeInTheDocument();
+    expect(defaultButton.className).toMatch(/ghost/)
+    })
+})
