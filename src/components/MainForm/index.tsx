@@ -50,7 +50,7 @@ export default function MainForm() {
         <DefaultButton
           type="submit"
           icon={<MessageCirclePlusIcon />}
-          color="orange"
+          color="primary"
           aria-label="Initiate task"
           title="Initiate task"
         >

@@ -21,19 +21,24 @@ export function ListNotifications() {
   const [page, setPage] = useState<number>(0);
   const size = 10;
 
-  const { data: notifications = emptyPagedResponse, isLoading, error, refetch} = useQuery<GetNotificationsPagedResponse>({
-    queryKey: [ "notifications", page],
+  const {
+    data: notifications = emptyPagedResponse,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery<GetNotificationsPagedResponse>({
+    queryKey: ["notifications", page],
     queryFn: () => fetchNotificationsPaged(page, size),
     placeholderData: keepPreviousData,
-    staleTime: 1000
-});
+    staleTime: 1000,
+  });
 
-useEffect(() => {
-  if (error) {
-    toast.error("Failed to fetch notifications - query error");
-    console.error(error);
-  }
-}, [error]);
+  useEffect(() => {
+    if (error) {
+      toast.error("Failed to fetch notifications - query error");
+      console.error(error);
+    }
+  }, [error]);
 
   async function fetchNotificationsPaged(
     page: number,
@@ -80,68 +85,76 @@ useEffect(() => {
       <Container>
         <Heading>List Notifications</Heading>
       </Container>
-
-      <Container>
-        <div className={styles.notificationsTable}>
-          <table>
-            <thead>
-              <tr>
-                <th>id</th>
-                <th>user id</th>
-                <th>category</th>
-                <th>channel</th>
-                <th>message</th>
-                <th>timestamp</th>
-                <th>status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {notifications.data.map((notification) => {
-                return (
-                  <tr key={notification.id}>
-                    <td>{notification.id}</td>
-                    <td>{notification.userId}</td>
-                    <td>{notification.category}</td>
-                    <td>{notification.channel}</td>
-                    <td>{notification.message}</td>
-                    <td>{notification.timestamp}</td>
-                    <td>{notification.status}</td>
+      {notifications.size > 0 ? (
+        <>
+          <Container>
+            <div className={styles.notificationsTable}>
+              <table>
+                <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>user id</th>
+                    <th>category</th>
+                    <th>channel</th>
+                    <th>message</th>
+                    <th>timestamp</th>
+                    <th>status</th>
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </Container>
-
-      <Container>
-        <div className={styles.buttonContainer}>
-          <DefaultButton
-            icon={<LucideArrowLeft />}
-            color="orange"
-            title="Previous"
-            aria-label="Previous"
-            onClick={handlePrevious}
-            disabled={!hasPrevious()}
-          />
-          <DefaultButton
-            icon={<LucideArrowRight />}
-            color="orange"
-            title="Next"
-            aria-label="Next"
-            onClick={handleNext}
-            disabled={!hasNext()}
-          />
-          <DefaultButton
-            icon={<RefreshCcw />}
-            color="gray"
-            title="Next"
-            aria-label="Next"
-            onClick={() => refetch()}
-            disabled={isLoading}
-          />
-        </div>
-      </Container>
+                </thead>
+                <tbody>
+                  {notifications.data.map((notification) => {
+                    return (
+                      <tr key={notification.id}>
+                        <td>{notification.id}</td>
+                        <td>{notification.userId}</td>
+                        <td>{notification.category}</td>
+                        <td>{notification.channel}</td>
+                        <td>{notification.message}</td>
+                        <td>{notification.timestamp}</td>
+                        <td>{notification.status}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </Container>
+          <Container>
+            <div className={styles.buttonContainer}>
+              <DefaultButton
+                icon={<LucideArrowLeft />}
+                color="primary"
+                title="Previous"
+                aria-label="Previous"
+                onClick={handlePrevious}
+                disabled={!hasPrevious()}
+              />
+              <DefaultButton
+                icon={<LucideArrowRight />}
+                color="primary"
+                title="Next"
+                aria-label="Next"
+                onClick={handleNext}
+                disabled={!hasNext()}
+              />
+              <DefaultButton
+                icon={<RefreshCcw />}
+                color="ghost"
+                title="Next"
+                aria-label="Next"
+                onClick={() => refetch()}
+                disabled={isLoading}
+              />
+            </div>
+          </Container>{" "}
+        </>
+      ) : (
+        <Container>
+          <div>
+            <span>Nothing to show here.</span>
+          </div>
+        </Container>
+      )}
     </>
   );
 }
