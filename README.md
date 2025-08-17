@@ -52,6 +52,8 @@ Available Channels:
 - 🌱 **Vite**
 - 🎲 **Lucide Icons**
 - 🧰 **ESLint + Prettier** for code formatting and linting
+- 🧪 **Vitest** for unit and integration testing
+- 🧩 **@testing-library/react** for testing React components
 
 ---
 
@@ -97,6 +99,14 @@ To start the development server:
 
 ```bash
 npm run dev
+```
+
+### ▶️ Running tests
+
+To start the development server:
+
+```bash
+npm run test
 ```
 
 ---

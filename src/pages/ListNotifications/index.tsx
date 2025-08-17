@@ -11,26 +11,34 @@ import {
 } from "../../models/GetNotificationsPagedResponse";
 import { getNotificationsPaged } from "../../api/notificationService";
 import Header from "../../components/Header";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 
 export function ListNotifications() {
   useEffect(() => {
     document.title = "Study - List Notifications";
   }, []);
 
-  const [notifications, setNotifications] =
-    useState<GetNotificationsPagedResponse>(emptyPagedResponse);
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [page, setPage] = useState<number>(0);
   const size = 10;
 
-  useEffect(() => {
-    async function loadNotifications() {
-      const result = await fetchNotificationsPaged(page, size);
-      setNotifications(result);
-    }
+  const {
+    data: notifications = emptyPagedResponse,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery<GetNotificationsPagedResponse>({
+    queryKey: ["notifications", page],
+    queryFn: () => fetchNotificationsPaged(page, size),
+    placeholderData: keepPreviousData,
+    staleTime: 1000,
+  });
 
-    loadNotifications();
-  }, [page, refreshTrigger]);
+  useEffect(() => {
+    if (error) {
+      toast.error("Failed to fetch notifications - query error");
+      console.error(error);
+    }
+  }, [error]);
 
   async function fetchNotificationsPaged(
     page: number,
@@ -42,16 +50,8 @@ export function ListNotifications() {
       return result;
     } catch (err) {
       console.error(err);
-      toast.error("Failed to get notifications");
+      toast.error("Failed to fetch notifications");
       return emptyPagedResponse;
-    }
-  }
-
-  function refresh() {
-    if(page === 0) {
-      setRefreshTrigger((previous) => previous + 1);
-    } else {
-      setPage(0);
     }
   }
 
@@ -85,67 +85,76 @@ export function ListNotifications() {
       <Container>
         <Heading>List Notifications</Heading>
       </Container>
-
-      <Container>
-        <div className={styles.notificationsTable}>
-          <table>
-            <thead>
-              <tr>
-                <th>id</th>
-                <th>user id</th>
-                <th>category</th>
-                <th>channel</th>
-                <th>message</th>
-                <th>timestamp</th>
-                <th>status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {notifications.data.map((notification) => {
-                return (
-                  <tr key={notification.id}>
-                    <td>{notification.id}</td>
-                    <td>{notification.userId}</td>
-                    <td>{notification.category}</td>
-                    <td>{notification.channel}</td>
-                    <td>{notification.message}</td>
-                    <td>{notification.timestamp}</td>
-                    <td>{notification.status}</td>
+      {notifications.data.length > 0 ? (
+        <>
+          <Container>
+            <div className={styles.notificationsTable}>
+              <table>
+                <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>user id</th>
+                    <th>category</th>
+                    <th>channel</th>
+                    <th>message</th>
+                    <th>timestamp</th>
+                    <th>status</th>
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </Container>
-
-      <Container>
-        <div className={styles.buttonContainer}>
-          <DefaultButton
-            icon={<LucideArrowLeft />}
-            color="orange"
-            title="Previous"
-            aria-label="Previous"
-            onClick={handlePrevious}
-            disabled={!hasPrevious()}
-          />
-          <DefaultButton
-            icon={<LucideArrowRight />}
-            color="orange"
-            title="Next"
-            aria-label="Next"
-            onClick={handleNext}
-            disabled={!hasNext()}
-          />
-          <DefaultButton
-            icon={<RefreshCcw />}
-            color="gray"
-            title="Next"
-            aria-label="Next"
-            onClick={refresh}
-          />
-        </div>
-      </Container>
+                </thead>
+                <tbody>
+                  {notifications.data.map((notification) => {
+                    return (
+                      <tr key={notification.id}>
+                        <td>{notification.id}</td>
+                        <td>{notification.userId}</td>
+                        <td>{notification.category}</td>
+                        <td>{notification.channel}</td>
+                        <td>{notification.message}</td>
+                        <td>{notification.timestamp}</td>
+                        <td>{notification.status}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </Container>
+          <Container>
+            <div className={styles.buttonContainer}>
+              <DefaultButton
+                icon={<LucideArrowLeft />}
+                color="primary"
+                title="Previous"
+                aria-label="Previous"
+                onClick={handlePrevious}
+                disabled={!hasPrevious()}
+              />
+              <DefaultButton
+                icon={<LucideArrowRight />}
+                color="primary"
+                title="Next"
+                aria-label="Next"
+                onClick={handleNext}
+                disabled={!hasNext()}
+              />
+              <DefaultButton
+                icon={<RefreshCcw />}
+                color="ghost"
+                title="Refresh"
+                aria-label="Refresh"
+                onClick={() => refetch()}
+                disabled={isLoading}
+              />
+            </div>
+          </Container>{" "}
+        </>
+      ) : (
+        <Container>
+          <div>
+            <span>Nothing to show here.</span>
+          </div>
+        </Container>
+      )}
     </>
   );
 }
